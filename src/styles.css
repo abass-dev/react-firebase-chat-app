@@ -39,10 +39,12 @@
 
 .chat-interface {
   display: flex;
+  width:80%;
+  align-self: center;
   flex-direction: column ;
-  margin: 30px;
   padding-left: 20px;
   padding: 10px;
+  margin: 20px 0 50px 0;
   position:relative;
   border-radius: 15px;
   background-color: #d8f6fd;
@@ -51,16 +53,22 @@
   width: 45px;
   height: 45px;
   position: absolute;
-  right: -10px;
-  top: -10px;
+  right: -16px;
+  top: -16px;
   border-radius: 100%;
 }
+.chat-time {
+  position: absolute;
+  font-size: 11px;
+  bottom: -15px;
+}
 .chat-username {
-  font-size: 9px;
+  position: absolute;
   color: #00ccff;
+  bottom: 1.5px;
+  right: 10px;
 }
 .chat-message {
-  margin-top: 10px;
   margin-right: 22px;
 }
 .auth-login-btn:hover {
@@ -76,6 +84,9 @@
   margin: 0;
 }
 .chat-form-control {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding-bottom: 100px;
 }
 .chat-message-input {
@@ -84,7 +95,6 @@
   height: 50px;
   font-size: 1rem;
   padding: 5px;
-  margin-bottom: 1.1rem;
   outline: none;
   color: #00000090;
   border-radius: 15px 0 0 15px;
@@ -100,11 +110,44 @@
 }
 
 .chat-send-button {
-  margin-bottom: 1.1rem;
   border-radius: 0 15px 15px 0;
   background-color: #fff;
   border: 1px  solid #00000040;
   border-left: none;
   font-size: 1.5rem;
   padding-right: 5px;
+}
+  .chat-username {
+    font-size: 3vw;
+  }
+ .chat-message {
+    font-size: 5vw;
+  }
+
+/* For mobile screens */
+@media only screen and (max-width: 767px) {
+.chat-message {
+  padding: 5px;
+}
+  
+}
+
+/* For desktop screens */
+@media only screen and (min-width: 768px) {
+.chat-message {
+  padding: 25px;
+}
+.chat-time {
+  font-size:20px;
+  bottom: -30px;
+}
+.chat-user-icon {
+  width:100px;
+  height: 100px;
+  right: -40px;
+  top: -40px;
+}
+.chat-username {
+  font-size: 22px;
+}
 }
