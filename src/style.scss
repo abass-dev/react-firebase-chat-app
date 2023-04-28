@@ -220,7 +220,7 @@ $blueDark: rgb(6, 1, 18);
 
         .message {
           display: flex;
-          justify-content: space-between;
+          align-items: center;
           gap: 10px;
           &.owner {
             align-items: flex-end;
@@ -232,6 +232,8 @@ $blueDark: rgb(6, 1, 18);
             }
           }
           .messageInfo {
+            display: flex;
+            flex-direction: column;
             img {
               width: 40px;
               height: 40px;
@@ -247,7 +249,8 @@ $blueDark: rgb(6, 1, 18);
             flex-direction: column;
             max-width: 80%;
             img {
-              width: 50%;
+              width: 100px;
+              height: 100px
             }
 
             p {
