@@ -9,7 +9,11 @@
     @content;
   }
 }
-
+body {
+  @include mobile {
+    overflow: hidden;
+  }
+}
 $bg: #b1ebfa;
 $dark: #11003b;
 $primary: #458dfe;
@@ -107,6 +111,9 @@ $blueDark: rgb(6, 1, 18);
       background-color: $dark;
       position: relative;
       overflow: scroll;
+      @include mobile {
+        display: none;
+      }
       .navbar {
         display: flex;
         background-color: #030015;
@@ -155,7 +162,6 @@ $blueDark: rgb(6, 1, 18);
 
       .search {
         border-bottom: 1px solid lightgray;
-
         .searchForm {
           padding: 10px;
           input {
@@ -195,7 +201,7 @@ $blueDark: rgb(6, 1, 18);
 
     .chat {
       flex: 2;
-
+      
       .chatInfo {
         display: flex;
         align-items: center;
@@ -217,18 +223,26 @@ $blueDark: rgb(6, 1, 18);
         padding: 10px;
         overflow: scroll;
         height: calc(100% - 100px);
-
+        
+        
+      @include mobile {
+        padding-bottom: 100px;
+      }
+      
         .message {
           display: flex;
           align-items: center;
           gap: 10px;
+          margin-bottom: 40px;
           &.owner {
             align-items: flex-end;
             flex-direction: row-reverse;
             .messageContent {
+            align-items: flex-end;
               p {
                 border-radius: 8px 0 8px 8px;
               }
+             
             }
           }
           .messageInfo {
@@ -237,6 +251,7 @@ $blueDark: rgb(6, 1, 18);
             img {
               width: 40px;
               height: 40px;
+              object-fit: cover;
             }
             p {
               font-size: 14px;
@@ -249,8 +264,9 @@ $blueDark: rgb(6, 1, 18);
             flex-direction: column;
             max-width: 80%;
             img {
-              width: 100px;
-              height: 100px
+              width: 50%;
+              height: auto;
+              object-fit: cover;
             }
 
             p {
@@ -272,7 +288,11 @@ $blueDark: rgb(6, 1, 18);
         gap: 10px;
         height: 50px;
         padding: 10px;
-
+        
+        @include mobile {
+          position: fixed;
+          bottom: 0;
+        }
         input {
           width: 100%;
           font-size: 18px;
