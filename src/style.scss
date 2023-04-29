@@ -4,20 +4,37 @@
   box-sizing: border-box;
 }
 
+// Mobile
 @mixin mobile {
   @media screen and (max-width: 480px) {
     @content;
   }
 }
+
+// Tablet
+@mixin tablet {
+  @media screen and (min-width: 481px) and (max-width: 1024px) {
+    @content;
+  }
+}
+
+// Laptop
+@mixin laptop {
+  @media screen and (min-width: 1025px) {
+    @content;
+  }
+}
+
 body {
   @include mobile {
-    overflow: hidden;
+    // overflow: hidden;
   }
 }
 $bg: #b1ebfa;
 $dark: #11003b;
 $primary: #458dfe;
 $blueDark: rgb(6, 1, 18);
+
 
 .formContainer {
   min-height: 100vh;
@@ -101,19 +118,35 @@ $blueDark: rgb(6, 1, 18);
     display: flex;
     width: 70%;
     height: 70%;
-
     @include mobile {
       width: 100%;
       height: 100%;
     }
-    .sidebar {
-      flex: 1;
-      background-color: $dark;
-      position: relative;
-      overflow: scroll;
-      @include mobile {
-        display: none;
-      }
+    @include tablet {
+      width: 100%;
+      height: 100%;
+    }
+.sidebar {
+  background-color: $dark;
+  position: relative;
+  overflow: scroll;
+  flex: 1;
+
+  @include mobile {
+    position: absolute;
+    height: 100%;
+    width: 80%;
+    left: -999px;
+    opacity: 0.9;
+    transition: opacity 0.5s ease-out;
+
+    &.toggleSideBar {
+      opacity: 1;
+      flex: 3;
+      left: -0;
+    }
+  }
+ 
       .navbar {
         display: flex;
         background-color: #030015;
@@ -133,7 +166,7 @@ $blueDark: rgb(6, 1, 18);
         .user {
           display: flex;
           align-items: center;
-          gap: 5px;
+          gap: 15px;
 
           img {
             width: 24px;
@@ -148,18 +181,9 @@ $blueDark: rgb(6, 1, 18);
         }
         button {
           border: 0;
-          border-radius: 1px;
-          padding: 1px;
-          color: #ffffff;
-          font-size: 10px;
-          background-color: #741fee;
-          @include mobile {
-            position: absolute;
-            bottom: 5px;
-          }
+          background-color: transparent;
         }
       }
-
       .search {
         border-bottom: 1px solid lightgray;
         .searchForm {
@@ -173,7 +197,7 @@ $blueDark: rgb(6, 1, 18);
           }
         }
       }
-      .chatUserInfo {
+      .chatSearchUserInfo {
         display: flex;
         align-items: center;
         padding: 10px;
@@ -184,8 +208,30 @@ $blueDark: rgb(6, 1, 18);
           background-color: $blueDark;
         }
         img {
-          width: 50px;
-          height: 50px;
+          height: 35px;
+          border-radius: 50%;
+        }
+        span {
+          font-size: 14px;
+          color: lightgray;
+        }
+      }
+      
+      .chats {
+       .chatUserInfo {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        cursor: pointer;
+        gap: 5px;
+
+        &:hover {
+          background-color: $blueDark;
+        }
+        img {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
         }
         p {
           font-size: 14px;
@@ -197,10 +243,15 @@ $blueDark: rgb(6, 1, 18);
           font-weight: 500;
         }
       }
+      }
     }
 
     .chat {
       flex: 2;
+      
+      .openChatsBarBtn {
+        height: 24px;
+      }
       
       .chatInfo {
         display: flex;
@@ -209,6 +260,27 @@ $blueDark: rgb(6, 1, 18);
         padding: 10px;
         background-color: #fff;
         height: 50px;
+        
+        .chatTopNavUserInfo {
+          display: flex;
+          gap: 5px;
+          align-items: center;
+        .chatTopNavUserDisplayName {
+            display: none;
+            
+            @include tablet {
+              display: inline;
+            }
+        }
+        }
+        
+        .chatTopNavUserDisplayImg {
+           height: 30px;
+           object-fit: cover;
+           border-radius: 50px;
+        }
+        
+        
       }
       .chatIcons {
         display: flex;
@@ -223,37 +295,39 @@ $blueDark: rgb(6, 1, 18);
         padding: 10px;
         overflow: scroll;
         height: calc(100% - 100px);
-        
-        
-      @include mobile {
-        padding-bottom: 100px;
-      }
-      
+
+        @include mobile {
+          padding-bottom: 100px;
+        }
+
         .message {
           display: flex;
           align-items: center;
           gap: 10px;
           margin-bottom: 40px;
           &.owner {
-            align-items: flex-end;
+            align-items: center;
             flex-direction: row-reverse;
             .messageContent {
-            align-items: flex-end;
+              align-items: flex-end;
               p {
                 border-radius: 8px 0 8px 8px;
+                background-color: #fff;
+                color: #00000090;
               }
-             
             }
           }
           .messageInfo {
             display: flex;
             flex-direction: column;
             img {
-              width: 40px;
-              height: 40px;
+              width: 45px;
+              height: 45px;
               object-fit: cover;
+              border-radius: 15px;
             }
             p {
+              margin-top: 5px;
               font-size: 14px;
               color: #00000090;
             }
@@ -288,7 +362,7 @@ $blueDark: rgb(6, 1, 18);
         gap: 10px;
         height: 50px;
         padding: 10px;
-        
+
         @include mobile {
           position: fixed;
           bottom: 0;
@@ -319,10 +393,7 @@ $blueDark: rgb(6, 1, 18);
 
           button {
             border: none;
-            color: #ffffff;
-            padding: 1px;
-            border-radius: 1px;
-            background-color: rgb(147, 210, 250);
+            background-color: transparent;
           }
         }
       }
