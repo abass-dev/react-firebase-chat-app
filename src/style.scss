@@ -35,7 +35,6 @@ $dark: #11003b;
 $primary: #458dfe;
 $blueDark: rgb(6, 1, 18);
 
-
 .formContainer {
   min-height: 100vh;
   display: flex;
@@ -126,27 +125,27 @@ $blueDark: rgb(6, 1, 18);
       width: 100%;
       height: 100%;
     }
-.sidebar {
-  background-color: $dark;
-  position: relative;
-  overflow: scroll;
-  flex: 1;
+    .sidebar {
+      background-color: $dark;
+      position: relative;
+      overflow: scroll;
+      flex: 1;
 
-  @include mobile {
-    position: absolute;
-    height: 100%;
-    width: 80%;
-    left: -999px;
-    opacity: 0.9;
-    transition: opacity 0.5s ease-out;
+      @include mobile {
+        position: absolute;
+        height: 100%;
+        width: 80%;
+        left: -999px;
+        opacity: 0.9;
+        transition: opacity 0.5s ease-out;
 
-    &.toggleSideBar {
-      opacity: 1;
-      flex: 3;
-      left: -0;
-    }
-  }
- 
+        &.toggleSideBar {
+          opacity: 1;
+          flex: 3;
+          left: -0;
+        }
+      }
+
       .navbar {
         display: flex;
         background-color: #030015;
@@ -216,43 +215,43 @@ $blueDark: rgb(6, 1, 18);
           color: lightgray;
         }
       }
-      
-      .chats {
-       .chatUserInfo {
-        display: flex;
-        align-items: center;
-        padding: 10px;
-        cursor: pointer;
-        gap: 5px;
 
-        &:hover {
-          background-color: $blueDark;
+      .chats {
+        .chatUserInfo {
+          display: flex;
+          align-items: center;
+          padding: 10px;
+          cursor: pointer;
+          gap: 5px;
+
+          &:hover {
+            background-color: $blueDark;
+          }
+          img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+          }
+          p {
+            font-size: 14px;
+            color: lightgray;
+          }
+          span {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 500;
+          }
         }
-        img {
-          width: 30px;
-          height: 30px;
-          border-radius: 50%;
-        }
-        p {
-          font-size: 14px;
-          color: lightgray;
-        }
-        span {
-          color: #ffffff;
-          font-size: 18px;
-          font-weight: 500;
-        }
-      }
       }
     }
 
     .chat {
       flex: 2;
-      
+
       .openChatsBarBtn {
         height: 24px;
       }
-      
+
       .chatInfo {
         display: flex;
         align-items: center;
@@ -260,27 +259,25 @@ $blueDark: rgb(6, 1, 18);
         padding: 10px;
         background-color: #fff;
         height: 50px;
-        
+
         .chatTopNavUserInfo {
           display: flex;
           gap: 5px;
           align-items: center;
-        .chatTopNavUserDisplayName {
+          .chatTopNavUserDisplayName {
             display: none;
-            
+
             @include tablet {
               display: inline;
             }
+          }
         }
-        }
-        
+
         .chatTopNavUserDisplayImg {
-           height: 30px;
-           object-fit: cover;
-           border-radius: 50px;
+          height: 30px;
+          object-fit: cover;
+          border-radius: 50px;
         }
-        
-        
       }
       .chatIcons {
         display: flex;
