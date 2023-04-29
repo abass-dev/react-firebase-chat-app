@@ -1,40 +1,36 @@
-import { useState, useRef } from 'react'
-import { Auth } from './components/Auth'
-import Cookies from 'universal-cookie';
-import { signOut } from 'firebase/auth'
-import { Chat } from './components/Chat'
-import { Rooms } from './components/Rooms'
-import { auth } from './firebase-config'
-import './App.css';
-
-const cookies = new Cookies();
+import { useContext } from 'react'
+import { Home, Register, Login } from './pages'
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+} from "react-router-dom";
+import { AuthContext } from './context/AuthContext'
+import { Navigate } from 'react-router-dom'
+import './style.scss'
 
 function App() {
-  const [isAuth, setIsAuth] = useState(cookies.get('auth-token'))
-  const [room, setRoom] = useState(null)
-  
-  const signOutUser = async () => {
-    await signOut(auth)
-    cookies.remove('auth-token')
-    setRoom(null)
-    setIsAuth(false)
-  }
-  
-  if (!isAuth) {
-  return <Auth setIsAuth={setIsAuth} />
-  }
-  
+  const {currentUser} = useContext(AuthContext)
+ 
+ const ProtecteRoute = ({children}) => {
+   if (!currentUser) {
+     return <Navigate to='/login' />
+   } else {
+     return children
+   }
+ }
+ 
   return (
-    <div>
-    {room ? <Chat room={room}/>:
-    (
-    <div>
-    <Rooms setRoom={setRoom}/>
-    </div>
-    )
-    }
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/"/>
+        <Route index element={<ProtecteRoute><Home /></ProtecteRoute>} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route/>
+      </Routes>
+    </BrowserRouter>
     )
 }
-
-export default App;
+export default App
